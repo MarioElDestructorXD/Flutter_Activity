@@ -1,35 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:learning_b/widgets/content_column.dart';
+import 'content_column.dart';
 
 class Home extends StatelessWidget {
-  const Home({
-    super.key,
-  });
+  const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Inicio"),
+        title: const Text('Título de la AppBar'),
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Row(
-          children: [
-            ContentColumn(title: 'Primera Columna', text: 'Primer Parrafo',),
-            ContentColumn(title: 'Segunda Columna', text: 'Segunda Parrafo',),
-            ContentColumn(title: 'Tercera Columna', text: 'Tercera Parrafo',),
-          ],
-        ),
+      body: const Column(
+        children: [
+          ContentColumn(
+            title: 'Primer columna',
+            text: 'Primer párrafo',
+          ),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: ContentColumn(
+              title: 'Segunda columna',
+              text: 'Segundo párrafo',
+            ),
+          ),
+          ContentColumn(
+            title: 'Tercer columna',
+            text: 'Tercer párrafo',
+          ),
+        ],
       ),
-      // ignore: avoid_print
-      floatingActionButton: FloatingActionButton(onPressed: () => print("Clic"),
-      backgroundColor: Colors.amber,
-      foregroundColor: Colors.black,
-      child: const Icon(Icons.home),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => print("Click"),
+        backgroundColor: Colors.cyanAccent[400],
+        foregroundColor: Colors.white,
+        child: const Icon(Icons.home),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
-
