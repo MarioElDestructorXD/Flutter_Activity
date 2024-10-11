@@ -6,10 +6,18 @@ import 'package:learning_b/navegation/reservations.dart';
 import 'package:learning_b/navegation/top.dart';
 import 'package:learning_b/widgets/SplashScreen.dart';
 import 'package:learning_b/widgets/home.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+// ...
 
 //import 'package:learning1/widgets/home.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MainApp());
 }
 

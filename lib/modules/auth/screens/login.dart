@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -84,8 +85,21 @@ class _LoginState extends State<Login> {
                   height: 48,
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
+                        try {
+                          final credential = await FirebaseAuth.instance
+                              .signInWithEmailAndPassword(
+                                  email: _emailController.text,
+                                  password: _passwordController.text);
+                          print("Credencial: $credential");
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'user-not-found') {
+                            print('No user found for that email.');
+                          } else if (e.code == 'wrong-password') {
+                            print('Wrong password provided for that user.');
+                          }
+                        }
                         // ignore: avoid_print
                         print(
                             ' Datos -> ${_emailController.text} ${_passwordController.text}');
