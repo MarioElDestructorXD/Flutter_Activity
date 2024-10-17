@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learning_b/navegation/pofile.dart';
 import 'package:learning_b/navegation/reservations.dart';
 import 'package:learning_b/navegation/top.dart';
-import 'package:learning_b/widgets/home.dart';
+import 'package:learning_b/navegation/home.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});

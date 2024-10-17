@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:learning_b/modules/auth/screens/create_account.dart';
 import 'package:learning_b/modules/auth/screens/login.dart';
 import 'package:learning_b/navegation/navigation.dart';
 import 'package:learning_b/navegation/pofile.dart';
 import 'package:learning_b/navegation/reservations.dart';
 import 'package:learning_b/navegation/top.dart';
 import 'package:learning_b/widgets/SplashScreen.dart';
-import 'package:learning_b/widgets/home.dart';
+import 'package:learning_b/navegation/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -32,12 +33,13 @@ class MainApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const SplashScreen(),
+        '/login': (context) => const Login(),
+        '/register': (context) => const CreateAccount(),
         '/menu': (context) => const Navigation(),
         '/home': (context) => const Home(),
-        '/profile': (context) => const Profile(),
-        '/reservations': (context) => const Reservations(),
         '/top': (context) => const Top(),
-        '/login': (context) => const Login()
+        '/reservations': (context) => const Reservations(),
+        '/profile': (context) => const Profile(),
       },
     );
   }
