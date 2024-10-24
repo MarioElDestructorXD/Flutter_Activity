@@ -66,18 +66,32 @@ class _LoginState extends State<Login> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () async {
-                      if (_formKey.currentState!.validate()) {}
-                      try {
-                        final credential = await FirebaseAuth.instance
-                            .signInWithEmailAndPassword(
-                                email: _emailController.text,
-                                password: _passwordController.text);
-                        print(credential);
-                      } on FirebaseAuthException catch (e) {
-                        if (e.code == 'user-not-found') {
-                          print('No user found for that email.');
-                        } else if (e.code == 'wrong-password') {
-                          print('Wrong password provided for that user.');
+                      if (_formKey.currentState!.validate()) {
+                        try {
+                          final credential = await FirebaseAuth.instance
+                              .signInWithEmailAndPassword(
+                                  email: _emailController.text,
+                                  password: _passwordController.text);
+
+                          print(credential);
+
+                          // Navegar al Home después de un inicio de sesión exitoso
+                          Navigator.pushReplacementNamed(context, '/home');
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'user-not-found') {
+                            print('No user found for that email.');
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text(
+                                      'No se encontró un usuario con ese correo.')),
+                            );
+                          } else if (e.code == 'wrong-password') {
+                            print('Wrong password provided for that user.');
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text('Contraseña incorrecta.')),
+                            );
+                          }
                         }
                       }
                     },

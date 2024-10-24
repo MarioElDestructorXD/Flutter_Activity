@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_b/navegation/pofile.dart';
-import 'package:learning_b/navegation/reservations.dart';
-import 'package:learning_b/navegation/top.dart';
+
 import 'package:learning_b/navegation/home.dart';
 
 class Navigation extends StatefulWidget {
@@ -15,8 +14,6 @@ class _NavigationState extends State<Navigation> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     Home(),
-    Top(),
-    Reservations(),
     Profile(),
   ];
 
