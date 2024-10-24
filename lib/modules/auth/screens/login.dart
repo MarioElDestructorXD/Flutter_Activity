@@ -12,7 +12,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool _isObscure = true;
+  final bool _isObscure = true;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   String? validateEmail(String? value) {
