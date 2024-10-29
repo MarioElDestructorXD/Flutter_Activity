@@ -4,10 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:learning_b/modules/auth/screens/restaurant_detail.dart';
 import 'package:learning_b/modules/restaurant/entities/restaurant.dart';
-<<<<<<< Updated upstream
-import 'package:learning_b/modules/restaurant/entities/widgets/custom_list_restaurant.dart';
-=======
->>>>>>> Stashed changes
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -17,9 +13,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool _isLoading = true;
   final db = FirebaseFirestore.instance;
-<<<<<<< Updated upstream
-=======
   List<Restaurant> restaurants = [];
 
   @override
@@ -59,7 +54,6 @@ class _HomeState extends State<Home> {
       );
     }
   }
->>>>>>> Stashed changes
 
   Future<void> _logout(BuildContext context) async {
     try {
@@ -74,6 +68,14 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    if (_isLoading || restaurants.isEmpty) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Restaurantes'),
@@ -84,43 +86,6 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-<<<<<<< Updated upstream
-      body: StreamBuilder<QuerySnapshot>(
-        stream: db.collection("restaurants").snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          }
-
-          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return const Center(child: Text('No restaurants available'));
-          }
-
-          List<Restaurant> restaurants = snapshot.data!.docs.map((doc) {
-            final data = doc.data()
-                as Map<String, dynamic>?; // Asegúrate de que es un Map
-            return Restaurant(
-              data?['count'] ?? 0,
-              data?['description'] ?? 'No description available',
-              List<String>.from(data?['images'] ?? []),
-              data?['name'] ?? 'Unknown',
-              (data?['rating'] as num?)?.toDouble() ?? 0.0,
-            );
-          }).toList();
-
-          return ListView.separated(
-            padding: const EdgeInsets.all(16),
-            itemCount: restaurants.length,
-            itemBuilder: (BuildContext context, int index) {
-              return CustomListRestaurant(restaurants: restaurants[index]);
-            },
-            separatorBuilder: (BuildContext context, int index) =>
-                const Divider(),
-=======
       body: ListView.builder(
         itemCount: restaurants.length,
         itemBuilder: (context, index) {
@@ -213,13 +178,12 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
->>>>>>> Stashed changes
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.pushNamed(context, '/top'),
-        backgroundColor: Colors.amber,
+        backgroundColor: Colors.green[300],
         foregroundColor: Colors.white,
         child: const Icon(Icons.home),
       ),
