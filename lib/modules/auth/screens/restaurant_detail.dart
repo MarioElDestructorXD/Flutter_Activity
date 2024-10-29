@@ -63,9 +63,7 @@ class _RestaurantDetailState extends State<RestaurantDetail> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Carrusel de imágenes
                   Expanded(
-                    // Usamos Expanded para que PageView ocupe el espacio disponible
                     child: PageView.builder(
                       itemCount: images.length,
                       onPageChanged: (index) {
@@ -82,8 +80,6 @@ class _RestaurantDetailState extends State<RestaurantDetail> {
                     ),
                   ),
                   const SizedBox(height: 8),
-
-                  // Indicadores de página
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(images.length, (index) {
@@ -101,8 +97,6 @@ class _RestaurantDetailState extends State<RestaurantDetail> {
                     }),
                   ),
                   const SizedBox(height: 16),
-
-                  // Nombre y calificación
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
