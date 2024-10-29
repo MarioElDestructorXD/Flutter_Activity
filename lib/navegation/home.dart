@@ -35,8 +35,6 @@ class _HomeState extends State<Home> {
           name: doc.data()['name'] ?? 'Unknown',
           rating: (doc.data()['rating'] as num?)?.toDouble() ?? 0.0,
         );
-
-        // Solo añadir restaurantes que tengan imágenes válidas
         if (restaurant.images.isNotEmpty && restaurant.images[0].isNotEmpty) {
           restaurants.add(restaurant);
         }
@@ -115,17 +113,10 @@ class _HomeState extends State<Home> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.network(
-                          restaurants[index].images[0], // Solo se carga la primera imagen
+                          restaurants[index].images[0],
                           width: 80,
                           height: 80,
                           fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
-                            return const SizedBox(
-                              width: 80,
-                              height: 80,
-                              child: Icon(Icons.error), // Icono de error
-                            );
-                          },
                         ),
                       ),
                       const SizedBox(width: 16),
